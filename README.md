@@ -3,7 +3,9 @@ A property drawer base class that imitates Unity's custom inspectors but for pro
 
 I have always hated property drawers becuase they are overly complicated and lack the versitlity of Unity's custom inspectors. I got so tired of having to keep track of property rects and typing out verbose code that I made this simple class that simplifies property drawers and automatically keeps track of property heights and positions. It also includes some exta label options, spaces, and layout groups.
 
-Inherit PropertDrawerbase as a base class instead of Unity's built in PropertyDrawer class to use.
+Inherit SimplePropertyDrawer as a base class instead of Unity's built in PropertyDrawer class to use.
+
+#### NOTE: This class is intended to be used with the legacy property drawer, not UIElements.
 
 <details>
   <summary>Methods</summary>
@@ -12,11 +14,9 @@ Return Type | Name | Description
 ------------|------|------------
 GUIContent | BeginProperty( ref Rect aPosition, SerializedProperty aProperty, GUIContent aLabel ) | Call this at the beginning of the custom property.
 void | EndProperty() | Call this at the end of the custom property.
-void | DrawField( string aPropertyName ) | Draws a property field with the supplied property name using the base SerializedProperty.
-void | DrawField( SerializedProperty aProperty, string aPropertyName ) | Draws a property field with the supplied name using the supplied SerializedProperty.
-void | DrawLabel( string aString ) | Draws a label using the provided string.
-void | DrawLabel( string aString, TextAnchor aAlignment ) | Draws a label using the provided string and text alignment.
-void | DrawLabel( string aString, TextAnchor aAlignment, int aFontSize ) | Draws a label using the provided string, text alignment, and font size.
+void | DrawField( string aPropertyName, [string aDisplayName], [int aLabelWidth], [int aLimitFieldWidth], [Color aBackgroundColor] ) | Draws a property field with the supplied property name using the base SerializedProperty.
+void | DrawField( SerializedProperty aProperty, string aPropertyName, [string aDisplayName], [int aLabelWidth], [int aLimitFieldWidth], [Color aBackgroundColor] ) | Draws a property field with the supplied name using the supplied SerializedProperty.
+void | DrawLabel( string aString, [TextAnchor aAlignment], [int aFontSize], [Color aBackgroundColor], [int[] aPadding], [int aFixedHeight] ) | Draws a label using the provided string and settings.
 void | DrawSpace( [int aHeight] ) | Draws an empty space using the defualt space height or a specified height.
 void | DrawFoldout( bool aFoldout, string aLabel, System.Action aDrawAction, out bool aIsOpen, [bool aToggleOnLabelClick = true] | Draws a foldout and it's content when opened.
 void | AddSize( int aWidth, int aHeight ) | Call this whenever drawing a property field outside of DrawField() and DrawLabel() to calculate it's size into the drawer height and layout group dimensions.
